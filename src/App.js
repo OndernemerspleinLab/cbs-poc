@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import {Stats} from './Stats';
 
-class App extends Component {
+const apiUrl = 'http://opendata.cbs.nl/ODataApi/odata/82242NED/TypedDataSet?$top=10&$filter=((TypeGefailleerde+eq+%27TG08%27))+and+((substringof(%27MM%27,Perioden)))';
+
+
+
+export const App = class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    axios.get(apiUrl).then(({data}) => this.setState((prevState) => Object.assign({}, prevState, data)));
+  }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Stats data={this.state.value}/>
       </div>
     );
   }
 }
-
-export default App;
