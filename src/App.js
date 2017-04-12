@@ -42,7 +42,7 @@ const Intro = styled.p`
 `;
 const ShortDescription = styled.p`
   ${sidePadding}
-  max-width: 30rem;
+  max-width: 34rem;
   margin-left: auto;
   margin-right: auto;
 `;
