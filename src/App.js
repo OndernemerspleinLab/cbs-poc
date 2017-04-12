@@ -45,6 +45,7 @@ const ShortDescription = styled.p`
   max-width: 34rem;
   margin-left: auto;
   margin-right: auto;
+  white-space: pre-wrap;
 `;
 
 const Attribution = styled((props) => (
