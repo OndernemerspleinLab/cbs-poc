@@ -3,13 +3,15 @@ import axios from 'axios';
 import {Stats} from './Stats';
 import styled, {css, injectGlobal} from 'styled-components';
 
-const datasetBaseUri = `http://opendata.cbs.nl/ODataApi/odata/82242NED/TypedDataSet`;
-const datasetFilter = `$filter=((TypeGefailleerde+eq+%27TG08%27))+and+((substringof(%27MM%27,Perioden)))`;
+const datasetId = `82242NED`;
 const limit = 100;
 
+const datasetBaseUri = `http://opendata.cbs.nl/ODataApi/odata/${datasetId}/TypedDataSet`;
+const datasetFilter = `$filter=((TypeGefailleerde+eq+%27TG08%27))+and+((substringof(%27MM%27,Perioden)))`;
+ 
 const dataUri = `${datasetBaseUri}?$top=${limit}&${datasetFilter}`;
 
-const infoBaseUri = `http://opendata.cbs.nl/ODataApi/odata/82242NED/TableInfos`;
+const infoBaseUri = `http://opendata.cbs.nl/ODataApi/odata/${datasetId}/TableInfos`;
 const infoPropertyNames = `Title, Summary, ShortDescription`;
 const infoUri = `${infoBaseUri}?$select=${infoPropertyNames}`;
 
