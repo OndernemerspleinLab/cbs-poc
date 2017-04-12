@@ -18,7 +18,7 @@ const StatsContainer = styled.div`
 
 const RenderStats = ({data}) => (
     <StatsContainer>
-        <VictoryChart domainPadding={0}>
+        <VictoryChart domainPadding={0} animate={{}}>
             <VictoryAxis dependentAxis fixLabelOverlap/>
             <VictoryAxis
                 fixLabelOverlap
