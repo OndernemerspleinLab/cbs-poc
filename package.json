@@ -2,6 +2,7 @@
   "name": "cbs-poc",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ondernemerspleinlab.github.io/cbs-poc",
   "dependencies": {
     "axios": "^0.16.1",
     "immutable-js": "^0.3.1-6",
@@ -13,12 +14,15 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^6.10.3",
+    "gh-pages": "^0.12.0",
     "react-scripts": "0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   }
 }
