@@ -1,5 +1,5 @@
 import React from 'react';
-import {VictoryChart, VictoryLine, VictoryTooltip, VictoryAxis} from 'victory';
+import {VictoryChart, VictoryScatter, VictoryLine, VictoryTooltip, VictoryAxis, VictoryTheme} from 'victory';
 import styled, {keyframes} from 'styled-components';
 const hasData = ({data}) => data !== null && data !== undefined;
 
@@ -18,7 +18,7 @@ const StatsContainer = styled.div`
 
 const RenderStats = ({data}) => (
     <StatsContainer>
-        <VictoryChart domainPadding={0} animate={{}}>
+        <VictoryChart domainPadding={0} style={{parent:{maxHeight: '100vh'}}} theme={VictoryTheme.material}>
             <VictoryAxis dependentAxis fixLabelOverlap/>
             <VictoryAxis
                 fixLabelOverlap
@@ -31,12 +31,26 @@ const RenderStats = ({data}) => (
                 data={data}
                 x="Perioden"
                 y="UitgesprokenFaillissementen_1"
-                labels={({UitgesprokenFaillissementen_1, Perioden}) => `${UitgesprokenFaillissementen_1} in ${Perioden}`}
-                labelComponent={<VictoryTooltip/>}
-                interpolation="linear"
+                interpolation="cardinal"
                 style={{
                     data: {
-                        strokeWidth: 1,
+                        strokeWidth: 2,
+                    }
+                }}
+            />
+            <VictoryScatter
+                data={data}
+                x="Perioden"
+                y="UitgesprokenFaillissementen_1"
+                labels={({UitgesprokenFaillissementen_1, Perioden}) => `${UitgesprokenFaillissementen_1} in ${Perioden}`}
+                labelComponent={<VictoryTooltip/>}
+                size={5}
+                style={{
+                    data: {
+                        opacity: 0,
+                    },
+                    labels: {
+                        opacity: 1,
                     }
                 }}
             />
