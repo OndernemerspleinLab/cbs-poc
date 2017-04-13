@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import axios from 'axios';
 import {Stats} from './Stats';
 import styled, {css, injectGlobal} from 'styled-components';
+import glamorous from 'glamorous';
 
 const datasetId = `82242NED`;
 const limit = 100;
@@ -27,6 +28,11 @@ const sidePadding = css`
   padding-right: 2rem;
 `;
 
+const sidePaddingGlamorous = {
+  paddingLeft: '2rem',
+  paddingRight: '2rem',
+};
+
 const Title = styled.h1`
   font-weight: bold;
   font-size: 2em;
@@ -40,13 +46,13 @@ const Intro = styled.p`
   text-align: center;
   ${sidePadding}  
 `;
-const ShortDescription = styled.p`
-  ${sidePadding}
-  max-width: 34rem;
-  margin-left: auto;
-  margin-right: auto;
-  white-space: pre-wrap;
-`;
+
+const ShortDescription = glamorous.p({
+  maxWidth: '34rem',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  whiteSpace: 'pre-wrap',
+}, sidePaddingGlamorous);
 
 const Attribution = styled((props) => (
   <p {...props}>
