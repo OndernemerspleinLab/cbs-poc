@@ -1,6 +1,7 @@
 import React from 'react';
-import {VictoryChart, VictoryScatter, VictoryLine, VictoryTooltip, VictoryAxis, VictoryTheme} from 'victory';
+import {VictoryChart, VictoryGroup, VictoryLine, VictoryBar, VictoryAxis, VictoryTheme, VictoryLegend} from 'victory';
 import styled, {keyframes} from 'styled-components';
+
 const hasData = ({data}) => data !== null && data !== undefined;
 
 const fadeIn = keyframes`
@@ -16,46 +17,116 @@ const StatsContainer = styled.div`
     animation: ${fadeIn} 0.3s ease-in;
 `;
 
-const RenderStats = ({data}) => (
-    <StatsContainer>
-        <VictoryChart domainPadding={0} style={{parent:{maxHeight: '100vh'}}} theme={VictoryTheme.material}>
-            <VictoryAxis dependentAxis fixLabelOverlap/>
-            <VictoryAxis
-                fixLabelOverlap
-                style={{
-                    ticks: {stroke: "black", strokeWidth: 2, size: 2},
-                    grid: {stroke: "grey"},
-                }}
-            />
-            <VictoryLine
-                data={data}
-                x="Perioden"
-                y="UitgesprokenFaillissementen_1"
-                interpolation="cardinal"
-                style={{
-                    data: {
-                        strokeWidth: 2,
-                    }
-                }}
-            />
-            <VictoryScatter
-                data={data}
-                x="Perioden"
-                y="UitgesprokenFaillissementen_1"
-                labels={({UitgesprokenFaillissementen_1, Perioden}) => `${UitgesprokenFaillissementen_1} in ${Perioden}`}
-                labelComponent={<VictoryTooltip/>}
-                size={5}
-                style={{
-                    data: {
-                        opacity: 0,
-                    },
-                    labels: {
-                        opacity: 1,
-                    }
-                }}
-            />
-        </VictoryChart>
-    </StatsContainer>
+const lineColors = [
+    'red',
+    'purple',
+    'blue'
+];
+
+const StatsLegend = ({data, bedrijfstakkenBranches}) => (
+    <VictoryLegend
+        colorScale={lineColors}
+        data={Object.keys(data).map((key, index) => ({name: bedrijfstakkenBranches[key].Title, symbol: {type: 'square', fill: lineColors[index]}}))}
+        symbolSpacer={2}
+        gutter={4}
+        x={4}
+        style={{
+            data: {opacity: 0.5},
+            labels: { fontSize: 5 },
+        }}
+        padding={0}
+        orientation="horizontal"
+    />
+);
+
+const RenderStats = ({data, limit = 10, bedrijfstakkenBranches}) => (
+    <div>
+        <StatsContainer>
+            <VictoryChart width={350} height={200} domainPadding={15} style={{parent:{maxHeight: '100vh'}}} theme={VictoryTheme.material}>
+                <VictoryAxis
+                    dependentAxis
+                    fixLabelOverlap
+                        
+                    style={{
+                        tickLabels: {
+                            fontSize: '7px',
+                        }
+                    }}
+                />
+                <VictoryAxis
+                    fixLabelOverlap
+                    
+                    style={{
+                        tickLabels: {
+                            fontSize: '7px',
+                        }
+                    }}
+                    tickValues={Object.values(data)[0].slice(-limit).map(({format}) => format())}
+                />
+                <VictoryGroup colorScale={lineColors}>
+                    {Object.values(data).map((dataGroup, index) => (
+                        <VictoryBar
+                            data={dataGroup.slice(-limit)}
+                            x={({format}) => format()}
+                            y="Waarde_1"
+                            key={index}
+                            interpolation="cardinal"
+                            style={{
+                                data: {
+                                    opacity: 0.5,
+                                    width: 5,
+                                    transform: `translateX(${6 * (index - 1)}px)`,
+                                }
+                            }}
+                        />
+                    ))}
+                </VictoryGroup>
+                {StatsLegend({data, bedrijfstakkenBranches})}
+            </VictoryChart>
+        </StatsContainer>
+        <StatsContainer>
+            <VictoryChart width={350} height={200} domainPadding={0} style={{parent:{maxHeight: '100vh'}}} theme={VictoryTheme.material}>
+                <VictoryAxis
+                    dependentAxis
+                    fixLabelOverlap
+                        
+                    style={{
+                        tickLabels: {
+                            fontSize: '7px',
+                        }
+                    }}
+                />
+                <VictoryAxis
+                    fixLabelOverlap
+                    
+                    style={{
+                        tickLabels: {
+                            fontSize: '7px',
+                        }
+                    }}
+                    tickValues={Object.values(data)[0].map(({format}) => format())}
+                />
+                <VictoryGroup colorScale={lineColors}>
+                    {Object.values(data).map((dataGroup, index) => (
+                        <VictoryLine
+                            data={dataGroup}
+                            x={({format}) => format()}
+                            y="Waarde_1"
+                            key={index}
+                            interpolation="cardinal"
+                            style={{
+                                data: {
+                                    strokeWidth: 1,
+                                    opacity: 0.5,
+                                }
+                            }}
+                        />
+                    ))}
+                </VictoryGroup>
+                {StatsLegend({data, bedrijfstakkenBranches})}
+            </VictoryChart>
+        </StatsContainer>
+    </div>
 );
 
 const Message = styled.p`

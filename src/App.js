@@ -1,27 +1,30 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 import {Stats} from './Stats';
-import styled, {css, injectGlobal} from 'styled-components';
+import styled, {css} from 'styled-components';
 import glamorous from 'glamorous';
+import {css as glamorCss} from 'glamor';
+import {parseCbsPeriod} from './cbsPeriod';
 
-const datasetId = `82242NED`;
-const limit = 100;
+const datasetId = `82439NED`;
 
 const datasetBaseUri = `https://opendata.cbs.nl/ODataApi/odata/${datasetId}/TypedDataSet`;
-const datasetFilter = `$filter=((TypeGefailleerde+eq+%27TG08%27))+and+((substringof(%27MM%27,Perioden)))`;
+const datasetFilter = `$filter=((BedrijfstakkenBranches+eq+%27389105%27)+or+(BedrijfstakkenBranches+eq+%27389100%27)+or+(BedrijfstakkenBranches+eq+%27389300%27))+and+((substringof(%27KW%27,Perioden)))&$select=BedrijfstakkenBranches,Perioden,Waarde_1`;
  
-const dataUri = `${datasetBaseUri}?$top=${limit}&${datasetFilter}`;
+const dataUri = `${datasetBaseUri}?${datasetFilter}`;
 
 const infoBaseUri = `https://opendata.cbs.nl/ODataApi/odata/${datasetId}/TableInfos`;
 const infoPropertyNames = `Title, Summary, ShortDescription`;
 const infoUri = `${infoBaseUri}?$select=${infoPropertyNames}`;
 
-injectGlobal`
+const brancheInfoUri = `http://opendata.cbs.nl/ODataApi/odata/${datasetId}/BedrijfstakkenBranches`;
+
+glamorCss.insert(`
   html {
     font-family: sans-serif;
     line-height: 1.6;
   }
-`;
+`);
 
 const sidePadding = css`
   padding-left: 2rem;
@@ -66,20 +69,41 @@ const Attribution = styled((props) => (
   text-align: right;
 `;
 
+const groupBy = grouper => list => 
+    list.reduce((memo, value) => {
+        const groupName = grouper(value);
+
+        if (!memo[groupName]) {
+            memo[groupName] = [];
+        }
+
+        memo[groupName].push(value);
+
+        return memo;
+    }, {});
+
+const processPeriods = (data) => data.map((entry) => Object.assign({}, entry, parseCbsPeriod(entry.Perioden)));
+const processData = (data) => ({
+  data: groupBy((item) => item.BedrijfstakkenBranches)(data)
+});
+
 export const App = class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
 
-    axios.get(dataUri).then(({data}) => this.setState((prevState) => Object.assign({}, prevState, data)));
-    axios.get(infoUri).then(({data: {value: [info]} = {}}) => this.setState((prevState) => Object.assign({}, prevState, info)));
+    Promise.all([
+      axios.get(dataUri).then(({data}) => processData(processPeriods(data.value))),
+      axios.get(infoUri).then(({data: {value: [info]} = {}}) => info),
+      axios.get(brancheInfoUri).then(({data: {value}}) => ({ bedrijfstakkenBranches: value.reduce((memo, {Key, Title}) => (memo[Key] = {Key, Title}, memo), {})})),
+    ]).then((data) => this.setState((prevState) => Object.assign({}, prevState, ...data)));
   }
   render() {
     return (
       <div className="App">
         <Title>{this.state.Title}</Title>
         <Intro>{this.state.Summary}</Intro>
-        <Stats data={this.state.value}/>
+        <Stats data={this.state.data} bedrijfstakkenBranches={this.state.bedrijfstakkenBranches}/>
         <ShortDescription>{this.state.ShortDescription}</ShortDescription>
         <Attribution/>
       </div>

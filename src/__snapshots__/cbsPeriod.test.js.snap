@@ -1,0 +1,49 @@
+exports[`test CBS Period - Dagen 1`] = `
+Object {
+  "endDate": "Wed Mar 25 2015 23:59:59 GMT+0100 (West-Europa (standaardtijd))",
+  "formattedDate": "25 mar 2015",
+  "input": "20150325",
+  "startDate": "Wed Mar 25 2015 00:00:00 GMT+0100 (West-Europa (standaardtijd))",
+  "type": "Dagen",
+}
+`;
+
+exports[`test CBS Period - Jaar 1`] = `
+Object {
+  "endDate": "Thu Dec 31 2015 23:59:59 GMT+0100 (West-Europa (standaardtijd))",
+  "formattedDate": "2015",
+  "input": "2015JJ00",
+  "startDate": "Thu Jan 01 2015 00:00:00 GMT+0100 (West-Europa (standaardtijd))",
+  "type": "Jaar",
+}
+`;
+
+exports[`test CBS Period - Kwartalen 1`] = `
+Object {
+  "endDate": "Sun Dec 31 2017 23:59:59 GMT+0100 (West-Europa (standaardtijd))",
+  "formattedDate": "2017 Q4",
+  "input": "2017KW04",
+  "startDate": "Sun Oct 01 2017 00:00:00 GMT+0200 (West-Europa (zomertijd))",
+  "type": "Kwartalen",
+}
+`;
+
+exports[`test CBS Period - Maanden 1`] = `
+Object {
+  "endDate": "Sat Jun 30 2001 23:59:59 GMT+0200 (West-Europa (zomertijd))",
+  "formattedDate": "jun 2001",
+  "input": "2001MM06",
+  "startDate": "Fri Jun 01 2001 00:00:00 GMT+0200 (West-Europa (zomertijd))",
+  "type": "Maanden",
+}
+`;
+
+exports[`test CBS Period - School-, Bouw-, Oogstjaar 1`] = `
+Object {
+  "endDate": "Wed Jul 31 2013 23:59:59 GMT+0200 (West-Europa (zomertijd))",
+  "formattedDate": "2012/2013",
+  "input": "2012SJ00",
+  "startDate": "Wed Aug 01 2012 00:00:00 GMT+0200 (West-Europa (zomertijd))",
+  "type": "School-, Bouw-, Oogstjaar",
+}
+`;
