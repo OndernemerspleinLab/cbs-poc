@@ -17,7 +17,7 @@ const infoBaseUri = `https://opendata.cbs.nl/ODataApi/odata/${datasetId}/TableIn
 const infoPropertyNames = `Title, Summary, ShortDescription`;
 const infoUri = `${infoBaseUri}?$select=${infoPropertyNames}`;
 
-const brancheInfoUri = `http://opendata.cbs.nl/ODataApi/odata/${datasetId}/BedrijfstakkenBranches`;
+const brancheInfoUri = `https://opendata.cbs.nl/ODataApi/odata/${datasetId}/BedrijfstakkenBranches`;
 
 glamorCss.insert(`
   html {
