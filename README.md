@@ -73,7 +73,7 @@ https://opendata.cbs.nl/ODataApi/odata/82439NED/TypedDataSet
 
 CBS heeft een eigen format om periodes aan te geven.
 
-In [./src/cbsPeriod.js] is een Javascript parser voor een deel van de periodetypes.
+In [src/cbsPeriod.js](src/cbsPeriod.js) is een Javascript parser voor een deel van de periodetypes.
 
 Een periode bestaat uit 8 tekens:
 
