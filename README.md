@@ -100,8 +100,8 @@ Bijvoorbeeld `2017KW04` is “Vierde kwartaal 2017”.
 
 ## Benodigde informatie voor grafiek
 
-- ID van datatabel, bijvoorbeeld `82439NED`
-- Dimensie x-as
-- Waarde voor y-as
-- Eventuele groepering van waardes op y-as voor bijvoorbeeld een grafiek met meerdere lijnen.
+- ID van datatabel, bijvoorbeeld `82439NED`.
+- Dimensie x-as, bijvoorbeeld `Perioden`.
+- Welke waarde voor y-as, bijvoorbeeld `Waarde_1`.
+- In het geval van eeh grafiek met meerdere lijnen: een groepering van waardes op y-as, bijvoorbeeld `BedrijfstakkenBranches`.
 
