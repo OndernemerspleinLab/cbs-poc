@@ -5,6 +5,11 @@ Experiment met CBS Open Data en ReactJS grafieken.
 Dit zijn de bevindingen specifiek voor dit proof-of-concept. 
 
 
+## Prototype
+
+[Prototype Horeca; omzetontwikkeling](https://ondernemerspleinlab.github.io/cbs-poc/)
+
+
 ## Documentatie API
 
 - [CBS Opendata uitleg](https://www.cbs.nl/nl-nl/onze-diensten/open-data/databank-cbs-statline-als-open-data)
