@@ -26,7 +26,7 @@ http://opendata.cbs.nl/ODataCatalog/?$format=json
 
 ### Overzicht tabellen
 
-http://opendata.cbs.nl/ODataCatalog/Tables?$format=json
+http://opendata.cbs.nl/ODataCatalog/Tables?$format=json&$select=Identifier,ShortTitle
 
 
 ## Opendata API
