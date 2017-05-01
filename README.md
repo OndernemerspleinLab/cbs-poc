@@ -108,6 +108,7 @@ Bijvoorbeeld `2017KW04` is “Vierde kwartaal 2017”.
 - ID van datatabel, bijvoorbeeld `82439NED`.
 - Dimensie x-as, bijvoorbeeld `Perioden`.
 - Range x-as, bijvoorbeeld vanaf `januari 2016` tot en met `maart 2016`.
+- Type van `Perioden` bijvoorbeeld `JJ` is per jaar en `KW` is per kwartaal.
 - Welke waarde voor y-as, bijvoorbeeld `Waarde_1`.
 - In het geval van eeh grafiek met meerdere lijnen: een groepering van waardes op y-as, bijvoorbeeld `BedrijfstakkenBranches`.
 - Type grafiek, bijvoorbeeld `staafdiagram`.
