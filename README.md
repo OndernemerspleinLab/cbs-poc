@@ -109,4 +109,4 @@ Bijvoorbeeld `2017KW04` is “Vierde kwartaal 2017”.
 - Dimensie x-as, bijvoorbeeld `Perioden`.
 - Welke waarde voor y-as, bijvoorbeeld `Waarde_1`.
 - In het geval van eeh grafiek met meerdere lijnen: een groepering van waardes op y-as, bijvoorbeeld `BedrijfstakkenBranches`.
-
+- Type grafiek.
