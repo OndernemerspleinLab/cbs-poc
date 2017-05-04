@@ -42,7 +42,7 @@ const StatsLegend = ({data, bedrijfstakkenBranches}) => (
 const RenderStats = ({data, limit = 10, bedrijfstakkenBranches}) => (
     <div>
         <StatsContainer>
-            <VictoryChart width={350} height={200} domainPadding={15} style={{parent:{maxHeight: '100vh'}}} theme={VictoryTheme.material}>
+            <VictoryChart width={350} height={200} domainPadding={15} style={{parent:{maxHeight: '100vh', minHeight: '50vw'}}} theme={VictoryTheme.material}>
                 <VictoryAxis
                     dependentAxis
                     fixLabelOverlap
@@ -63,7 +63,7 @@ const RenderStats = ({data, limit = 10, bedrijfstakkenBranches}) => (
                     }}
                     tickValues={Object.values(data)[0].slice(-limit).map(({format}) => format())}
                 />
-                <VictoryGroup colorScale={lineColors}>
+                <VictoryGroup colorScale={lineColors} offset={6}>
                     {Object.values(data).map((dataGroup, index) => (
                         <VictoryBar
                             data={dataGroup.slice(-limit)}
@@ -75,7 +75,6 @@ const RenderStats = ({data, limit = 10, bedrijfstakkenBranches}) => (
                                 data: {
                                     opacity: 0.5,
                                     width: 5,
-                                    transform: `translateX(${6 * (index - 1)}px)`,
                                 }
                             }}
                         />
@@ -85,7 +84,7 @@ const RenderStats = ({data, limit = 10, bedrijfstakkenBranches}) => (
             </VictoryChart>
         </StatsContainer>
         <StatsContainer>
-            <VictoryChart width={350} height={200} domainPadding={0} style={{parent:{maxHeight: '100vh'}}} theme={VictoryTheme.material}>
+            <VictoryChart width={350} height={200} domainPadding={0} style={{parent:{maxHeight: '100vh', minHeight: '50vw'}}} theme={VictoryTheme.material}>
                 <VictoryAxis
                     dependentAxis
                     fixLabelOverlap
