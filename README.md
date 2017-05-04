@@ -112,3 +112,15 @@ Bijvoorbeeld `2017KW04` is “Vierde kwartaal 2017”.
 - Welke waarde voor y-as, bijvoorbeeld `Waarde_1`.
 - In het geval van eeh grafiek met meerdere lijnen: een groepering van waardes op y-as, bijvoorbeeld `BedrijfstakkenBranches`.
 - Type grafiek, bijvoorbeeld `staafdiagram`.
+
+## Plan workflow voor redacteur
+
+1. De redacteur zoekt een dataset via https://opendata.cbs.nl/#/CBS/nl/
+2. De redacteur kopieert de URL, bijvoorbeeld https://opendata.cbs.nl/#/CBS/nl/dataset/82439NED/line?graphtype=Line en plakt deze in de editor
+3. De editing tool haalt de dataset ID uit de url en haalt de benodigde gegevens op.
+4. De x-as is altijd de Periode.
+5. De redacteur Kiest het type periode, bijvoorbeeld _per kwartaal_ of _per jaar_. Daarvan worden de meeste recente getoond. "De recentste `10` beschikbare `Kwartalen`".
+6. De redacteur kan een va de topics kiezen om op de y-as te tonen, bijvoorbeeld `Waarde`, `Prijs` of `Volume`.
+7. De editing tool leest labels van datasets in van het CBS. De redacteur kan deze labels overschrijven.
+8. De redacteur voegt eventueel nog een beschrijving bij de grafiek toe.
+9. De grafiek zal in de eerste versie altijd als lijngrafiek weergegeven worden.
